@@ -61,21 +61,46 @@ const getStatus = (userId) => {
     });
 };
 
-getStatus(2).then((status) => {
+// async and await
+// Note you can use await in the async function only
+const getStatusAlt = async (userId) => { 
+   //  throw new Error('this is an error'); // equvalent to rejecting
+    // return 'Mike'; // equals to resolve() in Promise
+    const user = await getUser(userId);
+    const grades = await getGrades(user.schoolId);
+
+    let average = 0;
+    if(grades.length > 0){
+        average = grades.map((grade) => grade.grade).reduce((a,b) => {
+            return a+ b;
+        }) / grades.length;
+    }
+    return `${user.name} has ${average}% in the class`;
+};
+
+getStatusAlt(2).then((status) => {
     console.log(status);
 }).catch((e) => {
     console.log(e);
 });
 
-getGrades(101).then((grades) => {
-    console.log(grades);
-}).catch((e) => {
-    console.log(e);
-});
+//console.log(getStatusAlt());
 
-getUser(2).then ((user) => {
-    console.log(user);
-}).catch((e) => {
-    console.log(e);
-});
+// getStatus(2).then((status) => {
+//     console.log(status);
+// }).catch((e) => {
+//     console.log(e);
+// });
+
+// getGrades(101).then((grades) => {
+//     console.log(grades);
+// }).catch((e) => {
+//     console.log(e);
+// });
+
+// getUser(2).then ((user) => {
+//     console.log(user);
+// }).catch((e) => {
+//     console.log(e);
+// });
 
