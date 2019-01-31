@@ -64,6 +64,7 @@ const getStatus = (userId) => {
 // async and await
 // Note you can use await in the async function only
 const getStatusAlt = async (userId) => { 
+// const getStatusAlt = async function(userId) { 
    //  throw new Error('this is an error'); // equvalent to rejecting
     // return 'Mike'; // equals to resolve() in Promise
     const user = await getUser(userId);
